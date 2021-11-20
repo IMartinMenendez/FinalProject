@@ -6,6 +6,7 @@ import com.ironhack.eventservice.models.Event;
 import com.ironhack.eventservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,16 @@ public class EventService {
         maybeCourse.get().setAttendees(eventRequest.getAttendees());
         maybeCourse.get().setPlace(eventRequest.getPlace());
         eventRepository.save(maybeCourse.get());
+    }
+
+    public void updateEventAttendee( Long id, List<Long> Attendees) throws Exception {
+        Optional<Event> maybeCourse = eventRepository.findById(id);
+        if(maybeCourse.isEmpty()){
+            throw new Exception("No Course found");
+        }
+        maybeCourse.get().setAttendees(Attendees);
+        eventRepository.save(maybeCourse.get());
+
     }
 
     public void createNewEvent(EventRequest eventRequest){

@@ -46,6 +46,12 @@ public class EventController {
         eventService.updateEvent(id, eventRequest);
     }
 
+    @PutMapping("/Event/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addNewAttendee(@PathVariable Long id,  @RequestBody List<Long> Attendees) throws Exception {
+        eventService.updateEventAttendee(id, Attendees);
+    }
+
     @PostMapping("/Events")
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewCourse(@RequestBody EventRequest eventRequest){
