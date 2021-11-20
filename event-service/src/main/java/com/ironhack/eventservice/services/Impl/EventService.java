@@ -1,5 +1,6 @@
 package com.ironhack.eventservice.services.Impl;
 
+import com.ironhack.eventservice.controller.dto.EventRequest;
 import com.ironhack.eventservice.controller.dto.EventResponse;
 import com.ironhack.eventservice.models.Event;
 import com.ironhack.eventservice.repository.EventRepository;
@@ -20,7 +21,7 @@ public class EventService {
         List<Event> events = eventRepository.findAll();
         List<EventResponse> eventResponses = new ArrayList<>();
         for (Event event : events) {
-            new EventResponse(event.getType(), event.getDate(),event.getTitle(),event.getDescription(), event.getPlace(), event.getType());
+            new EventResponse(event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
         }
         return eventResponses;
     }
@@ -30,6 +31,42 @@ public class EventService {
         if (maybeEvent.isEmpty()) {
             throw new Exception("No Event found");
         }
-        return new EventResponse(maybeEvent.get().getType(), maybeEvent.get().getDate(), maybeEvent.get().getTitle(), maybeEvent.get().getDescription(), maybeEvent.get().getPlace(), maybeEvent.get().getType());
+        return new EventResponse(maybeEvent.get().getType(), maybeEvent.get().getDate(), maybeEvent.get().getPlace(), maybeEvent.get().getTitle(), maybeEvent.get().getDescription(), maybeEvent.get().getCreator(),maybeEvent.get().getAttendees(), maybeEvent.get().getPicture());
+    }
+
+    public List<EventResponse> getEventByUserId(Long id){
+        List<Event> events = eventRepository.getEventByUser(id);
+        List<EventResponse> courseResponses = new ArrayList<>();
+        for (Event event : events) {
+            new EventResponse(event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
+        }
+        return courseResponses;
+    }
+
+    public void deleteEvent(Long id) throws Exception {
+        Optional<Event> maybeEvent = eventRepository.findById(id);
+        if(maybeEvent.isEmpty()){
+            throw new Exception("No Event found");
+        }
+        eventRepository.delete(maybeEvent.get());
+    }
+
+    public void updateEvent(Long id, EventRequest eventRequest) throws Exception {
+        Optional<Event> maybeCourse = eventRepository.findById(id);
+        if(maybeCourse.isEmpty()){
+            throw new Exception("No Course found");
+        }
+        maybeCourse.get().setTitle(eventRequest.getTitle());
+        maybeCourse.get().setDescription(eventRequest.getDescription());
+        maybeCourse.get().setPicture(eventRequest.getPicture());
+        maybeCourse.get().setType(eventRequest.getType());
+        maybeCourse.get().setAttendees(eventRequest.getAttendees());
+        maybeCourse.get().setPlace(eventRequest.getPlace());
+        eventRepository.save(maybeCourse.get());
+    }
+
+    public void createNewEvent(EventRequest eventRequest){
+        Event event = new Event(eventRequest.getType(), eventRequest.getDate(), eventRequest.getPlace(), eventRequest.getTitle(), eventRequest.getDescription(), eventRequest.getCreator(), eventRequest.getAttendees(), eventRequest.getPicture());
+        eventRepository.save(event);
     }
 }

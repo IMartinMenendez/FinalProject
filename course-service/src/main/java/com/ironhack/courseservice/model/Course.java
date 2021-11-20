@@ -34,4 +34,12 @@ public class Course {
     @Getter
     @Setter
     private String picture;
+
+    public Course(Long creatorId, String title, String description, String link, String picture) {
+        this.creatorId = creatorId;
+        this.title = title;
+        this.description = description;
+        this.link = link;
+        this.picture = picture;
+    }
 }

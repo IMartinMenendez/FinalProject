@@ -47,4 +47,15 @@ public class Event {
     @Getter
     @Setter
     private String picture;
+
+    public Event(String type, Date date, String place, String title, String description, Long creator, List<Long> attendees, String picture) {
+        this.type = type;
+        this.date = date;
+        this.place = place;
+        this.title = title;
+        this.description = description;
+        this.creator = creator;
+        this.attendees = attendees;
+        this.picture = picture;
+    }
 }

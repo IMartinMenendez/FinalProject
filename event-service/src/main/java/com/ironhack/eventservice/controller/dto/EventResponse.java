@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,13 +20,19 @@ public class EventResponse {
     private Date date;
     @Getter
     @Setter
+    private String place;
+    @Getter
+    @Setter
     private String title;
     @Getter
     @Setter
     private String description;
     @Getter
     @Setter
-    private String place;
+    private Long creator;
+    @Getter
+    @Setter
+    private List<Long> attendees;
     @Getter
     @Setter
     private String picture;
