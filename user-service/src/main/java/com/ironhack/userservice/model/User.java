@@ -40,4 +40,13 @@ public class User {
     @Getter
     @Setter
     private String password;
+
+    public User(List<Long> eventId, String name, String email, String role, Boolean isAdmin, String password) {
+        this.eventId = eventId;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.isAdmin = isAdmin;
+        this.password = password;
+    }
 }

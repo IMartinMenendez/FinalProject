@@ -6,7 +6,6 @@ import com.ironhack.edge.clients.EventClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class EventServiceImpl {
         return eventClient.getEventById(id);
     }
 
-    public List<EventResponse> getEventByUserId( Long userId) throws Exception{
+    public List<EventResponse> getEventByUserId(Long userId) throws Exception{
         return eventClient.getEventByUserId(userId);
     }
 
