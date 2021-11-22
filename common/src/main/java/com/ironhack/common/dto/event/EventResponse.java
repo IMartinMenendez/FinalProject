@@ -1,4 +1,4 @@
-package com.ironhack.eventservice.controller.dto;
+package com.ironhack.common.dto.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

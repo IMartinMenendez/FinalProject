@@ -1,14 +1,10 @@
 package com.ironhack.courseservice.services.Impl;
 
 
-import com.ironhack.courseservice.controller.dto.CourseRequest;
-import com.ironhack.courseservice.controller.dto.CourseResponse;
 import com.ironhack.courseservice.model.Course;
 import com.ironhack.courseservice.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,30 +14,17 @@ public class CourseServiceImpl {
     @Autowired
     CourseRepository courseRepository;
 
-    public List<CourseResponse> getAllCourses(){
-        List<Course> courses = courseRepository.findAll();
-        List<CourseResponse> courseResponses = new ArrayList<>();
-        for (Course course : courses) {
-            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
-        }
-        return courseResponses;
+    public List<Course> getAllCourses(){
+        return courseRepository.findAll();
     }
 
-    public CourseResponse getCourseById(Long id) throws Exception {
-        Optional<Course> maybeCourse = courseRepository.findById(id);
-        if(maybeCourse.isEmpty()){
-            throw new Exception("No Event found");
-        }
-        return new CourseResponse(maybeCourse.get().getCreatorId(), maybeCourse.get().getTitle(), maybeCourse.get().getDescription(), maybeCourse.get().getLink(), maybeCourse.get().getPicture());
+    public Optional<Course> getCourseById(Long id) {
+        return courseRepository.findById(id);
+
     }
 
-    public List<CourseResponse> getCourseByUserId(Long id){
-        List<Course> courses = courseRepository.getCourseByUserId(id);
-        List<CourseResponse> courseResponses = new ArrayList<>();
-        for (Course course : courses) {
-            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
-        }
-        return courseResponses;
+    public List<Course> getCourseByUserId(Long id){
+        return courseRepository.getCourseByUserId(id);
     }
 
     public void deleteCourse(Long id) throws Exception {
@@ -52,21 +35,20 @@ public class CourseServiceImpl {
         courseRepository.delete(maybeCourse.get());
     }
 
-    public void updateCourse(Long id, CourseRequest courseRequest) throws Exception {
+    public void updateCourse(Long id, Course course) throws Exception {
         Optional<Course> maybeCourse = courseRepository.findById(id);
         if(maybeCourse.isEmpty()){
             throw new Exception("No Course found");
         }
-        maybeCourse.get().setCreatorId(courseRequest.getCreatorId());
-        maybeCourse.get().setLink(courseRequest.getLink());
-        maybeCourse.get().setPicture(courseRequest.getPicture());
-        maybeCourse.get().setTitle(courseRequest.getTitle());
-        maybeCourse.get().setDescription(courseRequest.getDescription());
+        maybeCourse.get().setCreatorId(course.getCreatorId());
+        maybeCourse.get().setLink(course.getLink());
+        maybeCourse.get().setPicture(course.getPicture());
+        maybeCourse.get().setTitle(course.getTitle());
+        maybeCourse.get().setDescription(course.getDescription());
         courseRepository.save(maybeCourse.get());
     }
 
-    public void createNewCourse(CourseRequest courseRequest){
-        Course course = new Course(courseRequest.getCreatorId(), courseRequest.getTitle(), courseRequest.getDescription(), courseRequest.getLink(), courseRequest.getPicture());
+    public void createNewCourse(Course course){
         courseRepository.save(course);
     }
 }

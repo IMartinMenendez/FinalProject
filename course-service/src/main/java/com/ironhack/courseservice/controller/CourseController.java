@@ -1,14 +1,17 @@
 package com.ironhack.courseservice.controller;
 
-import com.ironhack.courseservice.controller.dto.CourseRequest;
-import com.ironhack.courseservice.controller.dto.CourseResponse;
+import com.ironhack.common.dto.course.CourseRequest;
+import com.ironhack.common.dto.course.CourseResponse;
+import com.ironhack.courseservice.model.Course;
 import com.ironhack.courseservice.services.Impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CourseController {
@@ -19,19 +22,33 @@ public class CourseController {
     @GetMapping("/Courses")
     @ResponseStatus(HttpStatus.OK)
     public List<CourseResponse> getAllCourses(){
-        return courseService.getAllCourses();
+        List<Course> courses = courseService.getAllCourses();
+        List<CourseResponse> courseResponses = new ArrayList<>();
+        for (Course course : courses) {
+            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
+        }
+        return courseResponses;
     }
 
     @GetMapping("/Course/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CourseResponse getCourseById(@PathVariable Long id) throws Exception {
-        return courseService.getCourseById(id);
+        Optional<Course> maybeCourse = courseService.getCourseById(id);
+        if(maybeCourse.isEmpty()){
+            throw new Exception("No Event found");
+        }
+        return new CourseResponse(maybeCourse.get().getCreatorId(), maybeCourse.get().getTitle(), maybeCourse.get().getDescription(), maybeCourse.get().getLink(), maybeCourse.get().getPicture());
     }
 
     @GetMapping("/Course/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CourseResponse> getCourseByUserId(@PathVariable Long userId) throws Exception {
-        return courseService.getCourseByUserId(userId);
+    public List<CourseResponse> getCourseByUserId(@PathVariable Long userId) {
+        List<Course> courses = courseService.getCourseByUserId(userId);
+        List<CourseResponse> courseResponses = new ArrayList<>();
+        for (Course course : courses) {
+            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
+        }
+        return courseResponses;
     }
 
     @DeleteMapping("/Course/{id}")
@@ -43,13 +60,15 @@ public class CourseController {
     @PutMapping("/Course/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateCourse(@PathVariable Long id,  @RequestBody CourseRequest courseRequest) throws Exception {
-        courseService.updateCourse(id, courseRequest);
+        Course course = new Course(courseRequest.getCreatorId(), courseRequest.getTitle(), courseRequest.getDescription(), courseRequest.getLink(), courseRequest.getPicture());
+        courseService.updateCourse(id, course);
     }
 
     @PostMapping("/Courses")
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewCourse(@RequestBody CourseRequest courseRequest){
-        courseService.createNewCourse(courseRequest);
+        Course course = new Course(courseRequest.getCreatorId(), courseRequest.getTitle(), courseRequest.getDescription(), courseRequest.getLink(), courseRequest.getPicture());
+        courseService.createNewCourse(course);
     }
 
 }

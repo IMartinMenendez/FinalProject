@@ -9,13 +9,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="course-service" />
         <module name="edge" />
-        <module name="user-service" />
+        <module name="common" />
         <module name="event-service" />
         <module name="eureka" />
+        <module name="user-service" />
         <module name="notification-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="common" target="11" />
       <module name="course-service" target="11" />
       <module name="edge" target="11" />
       <module name="eureka" target="11" />
@@ -26,6 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="-parameters" />
       <module name="course-service" options="-parameters" />
       <module name="edge" options="-parameters" />
       <module name="eureka" options="-parameters" />

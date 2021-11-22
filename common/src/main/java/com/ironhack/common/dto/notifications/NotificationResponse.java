@@ -1,4 +1,4 @@
-package com.ironhack.notificationservice.controller.dto;
+package com.ironhack.common.dto.notifications;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

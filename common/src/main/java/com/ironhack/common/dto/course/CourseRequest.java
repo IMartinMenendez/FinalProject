@@ -1,4 +1,4 @@
-package com.ironhack.courseservice.controller.dto;
+package com.ironhack.common.dto.course;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
