@@ -6,14 +6,13 @@ import com.ironhack.userservice.model.User;
 import com.ironhack.userservice.services.Impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
@@ -25,7 +24,7 @@ public class UserController {
         List<User> users = userService.getAllUsers();
         List<UserResponse> usersResponses = new ArrayList<>();
         for (User user : users) {
-            new UserResponse(user.getEventId(),  user.getName(), user.getEmail(), user.getRole(), user.getIsAdmin());
+            new UserResponse(user.getId(), user.getEventId(),  user.getName(), user.getEmail(), user.getRole(), user.getIsAdmin());
         }
         return usersResponses;
     }
@@ -37,14 +36,15 @@ public class UserController {
         if(maybeUser.isEmpty()){
             throw new Exception("No User found");
         }
-        return new UserResponse(maybeUser.get().getEventId(),  maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin());
+        return new UserResponse(maybeUser.get().getId(), maybeUser.get().getEventId(),  maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin());
     }
 
     @PostMapping("/Users")
+    @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
-    public void createNewUser(@RequestBody UserRequest userRequest){
+    public Long createNewUser(@RequestBody UserRequest userRequest){
         User user = new User(userRequest.getEventId(), userRequest.getName(), userRequest.getEmail(), userRequest.getRole(), userRequest.getIsAdmin(), userRequest.getPassword());
-        userService.createUser(user);
+        return userService.createUser(user);
     }
 
 

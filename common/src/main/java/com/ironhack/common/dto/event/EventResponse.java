@@ -14,6 +14,9 @@ import java.util.List;
 public class EventResponse {
     @Getter
     @Setter
+    private Long id;
+    @Getter
+    @Setter
     private String type;
     @Getter
     @Setter

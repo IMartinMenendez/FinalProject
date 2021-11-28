@@ -14,6 +14,9 @@ public class UserResponse {
 
     @Getter
     @Setter
+    private Long id;
+    @Getter
+    @Setter
     @ElementCollection
     private List<Long> eventId;
     @Getter

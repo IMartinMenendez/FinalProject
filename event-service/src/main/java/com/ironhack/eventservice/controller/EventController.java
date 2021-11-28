@@ -6,14 +6,13 @@ import com.ironhack.eventservice.models.Event;
 import com.ironhack.eventservice.services.Impl.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class EventController {
 
     @Autowired
@@ -25,7 +24,7 @@ public class EventController {
         List<Event> events = eventService.getAllEvents();
         List<EventResponse> eventResponses = new ArrayList<>();
         for (Event event : events) {
-            new EventResponse(event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
         }
         return eventResponses;
     }
@@ -37,7 +36,7 @@ public class EventController {
         if (maybeEvent.isEmpty()) {
             throw new Exception("No Event found");
         }
-        return new EventResponse(maybeEvent.get().getType(), maybeEvent.get().getDate(), maybeEvent.get().getPlace(), maybeEvent.get().getTitle(), maybeEvent.get().getDescription(), maybeEvent.get().getCreator(),maybeEvent.get().getAttendees(), maybeEvent.get().getPicture());
+        return new EventResponse(maybeEvent.get().getId(), maybeEvent.get().getType(), maybeEvent.get().getDate(), maybeEvent.get().getPlace(), maybeEvent.get().getTitle(), maybeEvent.get().getDescription(), maybeEvent.get().getCreator(),maybeEvent.get().getAttendees(), maybeEvent.get().getPicture());
 
     }
 
@@ -47,7 +46,7 @@ public class EventController {
         List<Event> events = eventService.getEventByUserId(userId);
         List<EventResponse> eventResponses = new ArrayList<>();
         for (Event event : events) {
-            new EventResponse(event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
+            new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
         }
         return eventResponses;
     }

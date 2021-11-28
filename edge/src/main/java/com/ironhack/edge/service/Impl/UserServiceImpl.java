@@ -22,7 +22,7 @@ public class UserServiceImpl {
         return userClient.getUserById(id);
     }
 
-    public void createUser(UserRequest user){
-        userClient.createNewUser(user);
+    public Long createUser(UserRequest user){
+       return userClient.createNewUser(user);
     }
 }

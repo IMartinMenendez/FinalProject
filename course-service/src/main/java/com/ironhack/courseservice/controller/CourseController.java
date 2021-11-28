@@ -6,14 +6,13 @@ import com.ironhack.courseservice.model.Course;
 import com.ironhack.courseservice.services.Impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class CourseController {
 
     @Autowired
@@ -25,7 +24,7 @@ public class CourseController {
         List<Course> courses = courseService.getAllCourses();
         List<CourseResponse> courseResponses = new ArrayList<>();
         for (Course course : courses) {
-            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
+            courseResponses.add(new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
         }
         return courseResponses;
     }

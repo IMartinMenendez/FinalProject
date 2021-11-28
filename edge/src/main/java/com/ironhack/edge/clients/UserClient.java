@@ -17,5 +17,5 @@ public interface UserClient {
     UserResponse getUserById(@PathVariable Long id) throws Exception;
 
     @PostMapping("/Users")
-    void createNewUser(@RequestBody UserRequest userRequest);
+    Long createNewUser(@RequestBody UserRequest userRequest);
 }
