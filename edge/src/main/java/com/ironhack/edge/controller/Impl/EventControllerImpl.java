@@ -29,11 +29,26 @@ public class EventControllerImpl {
         return eventService.getEventById(id);
     }
 
+    @GetMapping("/myevents/{creator}")
+    @CrossOrigin(value = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventsByCreator(@PathVariable Long creator,  @RequestHeader("X-Auth-Token") String token) throws Exception {
+        return eventService.getEventsByCreator(creator, token);
+    }
+
+    @GetMapping("/Event/Attendees/{attendeeId}")
+    @CrossOrigin(value = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventByAttendee(@PathVariable Long attendeeId,  @RequestHeader("X-Auth-Token") String token) throws Exception {
+        List<EventResponse> events = eventService.getEventByAttendee(attendeeId, token);
+        return events;
+    }
+
     @GetMapping("/Event/{userId}")
     @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
-    public List<EventResponse> getEventByUserId(@PathVariable Long userId) throws Exception{
-        return eventService.getEventByUserId(userId);
+    public List<EventResponse> getEventByUserId(@PathVariable Long userId ,@RequestHeader("X-Auth-Token") String token) throws Exception{
+        return eventService.getEventByUserId(userId, token);
     }
 
     @DeleteMapping("/Event/{id}")
@@ -45,24 +60,28 @@ public class EventControllerImpl {
 
     @PutMapping("/Event/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
     public void updateEvent(@PathVariable Long id,  @RequestBody EventRequest eventRequest) throws Exception{
         eventService.updateEvent(id, eventRequest);
     }
 
     @PutMapping("/Event/Attendees/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
     public void addNewAttendee(@PathVariable Long id,  @RequestBody Long attendeesId) throws Exception{
         eventService.addNewAttendee(id, attendeesId);
     }
 
     @PutMapping("/Event/Attendees-remove/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
     public void removeEventAttendee(@PathVariable Long id,  @RequestBody Long attendeesId) throws Exception {
         eventService.removeEventAttendee(id, attendeesId);
     }
 
     @PostMapping("/Events")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
     public void createNewEvent(@RequestBody EventRequest eventRequest){
         eventService.createNewEvent(eventRequest);
     }

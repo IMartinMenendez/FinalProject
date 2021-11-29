@@ -3,6 +3,7 @@ package com.ironhack.edge.clients;
 import com.ironhack.common.dto.event.EventRequest;
 import com.ironhack.common.dto.event.EventResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,13 @@ public interface EventClient {
 
     @GetMapping("/Events/{id}")
     EventResponse getEventById(@PathVariable Long id) throws Exception;
+
+    @GetMapping("/myevents/{creator}")
+    List<EventResponse> getEventsByCreator(@PathVariable Long creator);
+
+    @GetMapping("/Event/Attendees/{attendeeId}")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventByAttendee(@PathVariable Long attendeeId);
 
     @GetMapping("/Event/{userId}")
     List<EventResponse> getEventByUserId(@PathVariable Long userId) throws Exception;

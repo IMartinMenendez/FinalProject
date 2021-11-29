@@ -42,11 +42,33 @@ public class EventController {
 
     @GetMapping("/Event/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<EventResponse> getEventByUserId(@PathVariable Long userId) throws Exception {
+    public List<EventResponse> getEventByUserId(@PathVariable Long userId, @RequestHeader("X-Auth-Token") String token) throws Exception {
         List<Event> events = eventService.getEventByUserId(userId);
         List<EventResponse> eventResponses = new ArrayList<>();
         for (Event event : events) {
-            new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture());
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
+        }
+        return eventResponses;
+    }
+
+    @GetMapping("/Event/Attendees/{attendeeId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventByAttendee(@PathVariable Long attendeeId)  {
+        List<Event> events = eventService.getEventByAttendee(attendeeId);
+        List<EventResponse> eventResponses = new ArrayList<>();
+        for (Event event : events) {
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
+        }
+        return eventResponses;
+    }
+
+    @GetMapping("/myevents/{creator}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventsByCreator(@PathVariable Long creator) {
+        List<Event> events = eventService.getEventsByCreator(creator);
+        List<EventResponse> eventResponses = new ArrayList<>();
+        for (Event event : events) {
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
         }
         return eventResponses;
     }

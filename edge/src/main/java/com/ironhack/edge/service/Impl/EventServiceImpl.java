@@ -3,10 +3,9 @@ package com.ironhack.edge.service.Impl;
 import com.ironhack.common.dto.event.EventRequest;
 import com.ironhack.common.dto.event.EventResponse;
 import com.ironhack.edge.clients.EventClient;
+import com.ironhack.edge.clients.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -16,6 +15,9 @@ public class EventServiceImpl {
     @Autowired
     EventClient eventClient;
 
+    @Autowired
+    UserClient authorSessionClient;
+
     public List<EventResponse> getAllEvents(){
         return eventClient.getAllEvents();
     }
@@ -24,8 +26,32 @@ public class EventServiceImpl {
         return eventClient.getEventById(id);
     }
 
-    public List<EventResponse> getEventByUserId(Long userId) throws Exception{
-        return eventClient.getEventByUserId(userId);
+    public List<EventResponse> getEventByUserId(Long userId, String token) throws Exception{
+        Long user = authorSessionClient.getUserIdByToken(token);
+        if( user.equals(userId)){
+            return eventClient.getEventByUserId(userId);
+        }else{
+            throw new Exception("User not authenticated");
+        }
+    }
+
+    public List<EventResponse> getEventByAttendee(Long attendeeId, String token) throws Exception {
+        Long user = authorSessionClient.getUserIdByToken(token);
+        if(  user.equals(attendeeId)){
+            return eventClient.getEventByAttendee(attendeeId);
+        }else{
+            throw new Exception("User not authenticated");
+        }
+    }
+
+    public List<EventResponse> getEventsByCreator(Long creator, String token) throws Exception {
+       Long user = authorSessionClient.getUserIdByToken(token);
+        if( user.equals(creator)){
+            return eventClient.getEventsByCreator(creator);
+        }else{
+            throw new Exception("User not authenticated");
+        }
+
     }
 
     public void deleteEventId(Long id) throws Exception{
@@ -40,11 +66,13 @@ public class EventServiceImpl {
         eventClient.addNewAttendee(id, attendeesId);
     }
 
-    public void removeEventAttendee(@PathVariable Long id, @RequestBody Long attendeesId) throws Exception{
+    public void removeEventAttendee( Long id, Long attendeesId) throws Exception{
         eventClient.removeEventAttendee(id, attendeesId);
     }
 
     public void createNewEvent( EventRequest eventRequest){
         eventClient.createNewEvent(eventRequest);
     }
+
+
 }

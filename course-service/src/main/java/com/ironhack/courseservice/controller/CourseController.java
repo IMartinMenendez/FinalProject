@@ -29,7 +29,7 @@ public class CourseController {
         return courseResponses;
     }
 
-    @GetMapping("/Course/{id}")
+    @GetMapping("/Courses/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CourseResponse getCourseById(@PathVariable Long id) throws Exception {
         Optional<Course> maybeCourse = courseService.getCourseById(id);
@@ -45,7 +45,7 @@ public class CourseController {
         List<Course> courses = courseService.getCourseByUserId(userId);
         List<CourseResponse> courseResponses = new ArrayList<>();
         for (Course course : courses) {
-            new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture());
+            courseResponses.add(new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
         }
         return courseResponses;
     }

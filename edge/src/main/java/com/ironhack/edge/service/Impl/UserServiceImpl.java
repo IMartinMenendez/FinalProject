@@ -25,4 +25,8 @@ public class UserServiceImpl {
     public Long createUser(UserRequest user){
        return userClient.createNewUser(user);
     }
+
+    public UserResponse getUserByEmail(String email, String password) throws Exception {
+        return userClient.getUserByEmail(email, password);
+    }
 }

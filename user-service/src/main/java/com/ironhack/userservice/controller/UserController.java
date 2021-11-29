@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -37,6 +38,21 @@ public class UserController {
             throw new Exception("No User found");
         }
         return new UserResponse(maybeUser.get().getId(), maybeUser.get().getEventId(),  maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin());
+    }
+
+    @GetMapping("/User")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserByEmail(@RequestParam String email, @RequestParam String password) throws Exception {
+        Optional<User> maybeUser = userService.getUserByEmail(email);
+        if(maybeUser.isEmpty()){
+            throw new Exception("No User found");
+        } else {
+            if(Objects.equals(maybeUser.get().getPassword(), password)){
+                return new UserResponse(maybeUser.get().getId(), maybeUser.get().getEventId(),  maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin());
+            } else {
+                throw new Exception("Incorrect Password");
+            }
+        }
     }
 
     @PostMapping("/Users")

@@ -2,6 +2,7 @@ package com.ironhack.edge.controller.Impl;
 
 import com.ironhack.common.dto.course.CourseRequest;
 import com.ironhack.common.dto.course.CourseResponse;
+import com.ironhack.edge.clients.UserClient;
 import com.ironhack.edge.service.Impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class CourseControllerImpl {
     @Autowired
     CourseServiceImpl courseService;
 
+    @Autowired
+    UserClient authorSessionClient;
+
     @GetMapping("/Courses")
     @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
@@ -23,7 +27,7 @@ public class CourseControllerImpl {
         return courseService.getAllCourses();
     }
 
-    @GetMapping("/Course/{id}")
+    @GetMapping("/Courses/{id}")
     @CrossOrigin(value = "http://localhost:4200")
     CourseResponse getCourseById(@PathVariable Long id) throws Exception{
         return courseService.getCourseById(id);
@@ -31,8 +35,8 @@ public class CourseControllerImpl {
 
     @GetMapping("/Course/{userId}")
     @CrossOrigin(value = "http://localhost:4200")
-    List<CourseResponse> getCourseByUserId(@PathVariable Long userId){
-        return courseService.getCourseByUserId(userId);
+    List<CourseResponse> getCourseByUserId(@PathVariable Long userId, @RequestHeader("X-Auth-Token") String token) throws Exception {
+        return courseService.getCourseByUserId(userId, token);
     }
 
     @DeleteMapping("/Course/{id}")

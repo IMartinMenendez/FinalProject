@@ -2,7 +2,6 @@ package com.ironhack.edge.controller.Impl;
 
 import com.ironhack.common.dto.user.UserRequest;
 import com.ironhack.common.dto.user.UserResponse;
-import com.ironhack.edge.clients.UserClient;
 import com.ironhack.edge.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +27,13 @@ public class UserControllerImpl {
     @ResponseStatus(HttpStatus.OK)
     public UserResponse getUserById(@PathVariable Long id) throws Exception {
         return userService.getUserById(id);
+    }
+
+    @GetMapping("/User")
+    @CrossOrigin(value = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserByEmail(@RequestParam String email, @RequestParam String password) throws Exception {
+        return userService.getUserByEmail(email, password);
     }
 
     @PostMapping("/Users")

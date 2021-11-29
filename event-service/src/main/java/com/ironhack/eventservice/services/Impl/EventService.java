@@ -26,6 +26,10 @@ public class EventService {
         return eventRepository.getEventByUser(id);
     }
 
+    public List<Event> getEventByAttendee(Long attendeeId){
+        return eventRepository.getEventByAttendee(attendeeId);
+    }
+
     public void deleteEvent(Long id) throws Exception {
         Optional<Event> maybeEvent = eventRepository.findById(id);
         if(maybeEvent.isEmpty()){
@@ -69,5 +73,9 @@ public class EventService {
     public void createNewEvent(Event eventRequest){
         Event event = new Event(eventRequest.getType(), eventRequest.getDate(), eventRequest.getPlace(), eventRequest.getTitle(), eventRequest.getDescription(), eventRequest.getCreator(), eventRequest.getAttendees(), eventRequest.getPicture());
         eventRepository.save(event);
+    }
+
+    public List<Event> getEventsByCreator(Long creator) {
+        return eventRepository.getEventByCreator(creator);
     }
 }
