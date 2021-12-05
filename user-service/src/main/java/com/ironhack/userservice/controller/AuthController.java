@@ -9,6 +9,7 @@ import com.ironhack.userservice.services.Impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -24,12 +25,16 @@ public class AuthController {
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponse login(@RequestBody LoginRequest loginRequest) throws Exception {
-        String token = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        Optional<User> maybeUser = userService.getUserByEmail(loginRequest.getEmail());
-        if (maybeUser.isEmpty()) {
-            throw new Exception("No User found");
+        try {
+            String token = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
+            Optional<User> maybeUser = userService.getUserByEmail(loginRequest.getEmail());
+            if (maybeUser.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User and password do not match");
+            }
+            return new LoginResponse(maybeUser.get().getId(), maybeUser.get().getEventId(), maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin(), token);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User and password do not match");
         }
-        return new LoginResponse(maybeUser.get().getId(), maybeUser.get().getEventId(), maybeUser.get().getName(), maybeUser.get().getEmail(), maybeUser.get().getRole(), maybeUser.get().getIsAdmin(), token);
     }
 
     @DeleteMapping("/logout")

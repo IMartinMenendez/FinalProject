@@ -5,6 +5,7 @@ import com.ironhack.userservice.model.User;
 import com.ironhack.userservice.repository.AuthSessionRepository;
 import com.ironhack.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,8 @@ public class AuthServiceImpl {
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AuthSessionRepository authSessionRepository;
@@ -30,8 +33,7 @@ public class AuthServiceImpl {
         Optional<User> maybeUser = userRepository.getUserByEmail(email);
         if (maybeUser.isEmpty()) {
             throw new Exception("User doesn't exist");
-
-        } else if (maybeUser.get().getPassword().equals(password)) {
+        } else if (passwordEncoder.matches(password, maybeUser.get().getPassword())) {
             String token = generateNewToken();
             AuthSession authSession = new AuthSession(maybeUser.get(), token);
             authSessionRepository.save(authSession);

@@ -33,7 +33,8 @@ public interface EventClient {
     @PutMapping("/Event/{id}")
     void updateEvent(@PathVariable Long id,  @RequestBody EventRequest eventRequest) throws Exception;
 
-    @PutMapping("/Event/Attendees/{id}")
+    @PutMapping("/Event/Attendees-add/{id}")
+    @ResponseStatus(HttpStatus.OK)
     void addNewAttendee(@PathVariable Long id,  @RequestBody Long attendeesId) throws Exception;
 
     @PutMapping("/Event/Attendees-remove/{id}")

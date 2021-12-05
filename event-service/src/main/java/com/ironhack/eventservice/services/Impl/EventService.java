@@ -57,7 +57,13 @@ public class EventService {
         if(maybeCourse.isEmpty()){
             throw new Exception("No Event found");
         }
-        maybeCourse.get().getAttendees().add(attendeesId);
+        List<Long> eventId = maybeCourse.get().getAttendees();
+        for(int i=0; i < eventId.size(); i++){
+            if(eventId.get(i).equals(id)){
+                throw new Exception("You are already enrolled in this course");
+            }
+        }
+        eventId.add(attendeesId);
         eventRepository.save(maybeCourse.get());
     }
 

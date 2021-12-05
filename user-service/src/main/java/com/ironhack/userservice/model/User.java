@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -38,6 +39,9 @@ public class User {
     @Getter
     @Setter
     private String password;
+    @Getter
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    protected Set<Role> roles;
 
     public User(List<Long> eventId, String name, String email, String role, Boolean isAdmin, String password) {
         this.eventId = eventId;
@@ -47,4 +51,6 @@ public class User {
         this.isAdmin = isAdmin;
         this.password = password;
     }
+
+
 }

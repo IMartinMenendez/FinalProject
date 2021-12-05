@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 
 @RestController
@@ -21,6 +20,7 @@ public class AuthControllerImpl {
     @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponse login(@RequestBody LoginRequest loginRequest) throws Exception {
+
         return authSessionService.login(loginRequest);
     }
 

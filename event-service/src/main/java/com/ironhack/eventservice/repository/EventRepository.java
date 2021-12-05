@@ -25,6 +25,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("select e FROM Event e WHERE e.creator = :creator")
     List<Event> getEventByCreator(@Param("creator") Long creator);
 
-    @Query(value = "SELECT * FROM Event E right JOIN Event_attendees d ON D.event_id = E.id", nativeQuery = true)
+    @Query(value="SELECT * FROM EVENT E left JOIN event_attendees D ON d.event_id = e.id where d.attendees = :attendeeId", nativeQuery = true)
     List<Event> getEventByAttendee(Long attendeeId);
 }
