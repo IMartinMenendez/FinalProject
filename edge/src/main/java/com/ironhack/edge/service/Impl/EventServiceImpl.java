@@ -7,7 +7,9 @@ import com.ironhack.edge.clients.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventServiceImpl {
@@ -52,6 +54,14 @@ public class EventServiceImpl {
             throw new Exception("User not authenticated");
         }
 
+    }
+
+    public List<EventResponse> getEventsComingSoon(String date){
+        return eventClient.getEventsComingSoon(date);
+    }
+
+    public List<EventResponse> getEventByTypeAndPlace(String type, String place){
+        return eventClient.getEventByTypeAndPlace(type, place);
     }
 
     public void deleteEventId(Long id) throws Exception{

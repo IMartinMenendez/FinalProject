@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,28 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public List<EventResponse> getEventsByCreator(@PathVariable Long creator) {
         List<Event> events = eventService.getEventsByCreator(creator);
+        List<EventResponse> eventResponses = new ArrayList<>();
+        for (Event event : events) {
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
+        }
+        return eventResponses;
+    }
+
+    @GetMapping("/ComingSoon/{date}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventsComingSoon(@PathVariable String date) {
+        List<Event> events = eventService.getEventsComingSoon(date);
+        List<EventResponse> eventResponses = new ArrayList<>();
+        for (Event event : events) {
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
+        }
+        return eventResponses;
+    }
+
+    @GetMapping("/EventFilter")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventByTypeAndPlace(@RequestParam String type, @RequestParam String place) {
+        List<Event> events = eventService.getEventByTypeAndPlace(type, place);
         List<EventResponse> eventResponses = new ArrayList<>();
         for (Event event : events) {
             eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));

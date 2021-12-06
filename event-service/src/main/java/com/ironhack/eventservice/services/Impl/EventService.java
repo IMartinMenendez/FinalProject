@@ -5,6 +5,7 @@ import com.ironhack.eventservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,20 @@ public class EventService {
         }
         maybeCourse.get().getAttendees().remove(attendeesId);
         eventRepository.save(maybeCourse.get());
+    }
+
+    public List<Event> getEventsComingSoon(String date){
+        return eventRepository.getEventsComingSoon(date);
+    }
+
+    public List<Event> getEventByTypeAndPlace(String type, String place){
+        if(!type.equals("undefined") && !place.equals("undefined")){
+            return eventRepository.getEventByTypeAndPlace(type, place);
+        } else if (!type.equals("undefined")){
+            return eventRepository.getEventByType(type);
+        } else{
+            return eventRepository.getEventByPlace(place);
+        }
     }
 
     public void createNewEvent(Event eventRequest){

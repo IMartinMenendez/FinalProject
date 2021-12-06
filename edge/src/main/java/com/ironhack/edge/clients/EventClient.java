@@ -6,7 +6,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @FeignClient("event-service")
 public interface EventClient {
@@ -26,6 +29,14 @@ public interface EventClient {
 
     @GetMapping("/Event/{userId}")
     List<EventResponse> getEventByUserId(@PathVariable Long userId) throws Exception;
+
+    @GetMapping("/ComingSoon/{date}")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventsComingSoon(@PathVariable String date);
+
+    @GetMapping("/EventFilter")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventByTypeAndPlace(@RequestParam String type, @RequestParam String place);
 
     @DeleteMapping("/Event/{id}")
     void deleteEventId(@PathVariable Long id) throws Exception;

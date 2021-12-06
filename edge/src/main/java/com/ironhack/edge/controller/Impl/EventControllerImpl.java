@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EventControllerImpl {
@@ -49,6 +51,20 @@ public class EventControllerImpl {
     @ResponseStatus(HttpStatus.OK)
     public List<EventResponse> getEventByUserId(@PathVariable Long userId ,@RequestHeader("X-Auth-Token") String token) throws Exception{
         return eventService.getEventByUserId(userId, token);
+    }
+
+    @GetMapping("/EventFilter")
+    @CrossOrigin(value = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventByTypeAndPlace(@RequestParam String type, @RequestParam String place){
+        return eventService.getEventByTypeAndPlace(type, place);
+    }
+
+    @GetMapping("/ComingSoon/{date}")
+    @CrossOrigin(value = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventsComingSoon(@PathVariable String date) {
+        return eventService.getEventsComingSoon(date);
     }
 
     @DeleteMapping("/Event/{id}")
