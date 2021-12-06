@@ -1,11 +1,14 @@
 package com.ironhack.eventservice.controller;
 
+import com.ironhack.common.dto.event.EventKafka;
 import com.ironhack.common.dto.event.EventRequest;
 import com.ironhack.common.dto.event.EventResponse;
+import com.ironhack.eventservice.KafkaProducerConfig;
 import com.ironhack.eventservice.models.Event;
 import com.ironhack.eventservice.services.Impl.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,6 +21,9 @@ public class EventController {
 
     @Autowired
     EventService eventService;
+
+    @Autowired
+    private KafkaTemplate<String, EventKafka> kafkaTemplate;
 
     @GetMapping("/Events")
     @ResponseStatus(HttpStatus.OK)
@@ -99,6 +105,10 @@ public class EventController {
     @DeleteMapping("/Event/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteEventId(@PathVariable Long id) throws Exception {
+        Optional<Event> event = eventService.getEventById(id);
+        if(event.isPresent()){
+            kafkaTemplate.send("events", new EventKafka(event.get().getId(), event.get().getType(), event.get().getDate(), event.get().getPlace(), event.get().getTitle(), event.get().getDescription(), event.get().getCreator(), event.get().getAttendees(),  event.get().getPicture(), true));
+        }
         eventService.deleteEvent(id);
     }
 
@@ -106,6 +116,7 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public void updateEvent(@PathVariable Long id,  @RequestBody EventRequest eventRequest) throws Exception {
         Event event = new Event(eventRequest.getType(), eventRequest.getDate(), eventRequest.getPlace(), eventRequest.getTitle(), eventRequest.getDescription(), eventRequest.getCreator(), eventRequest.getAttendees(),  eventRequest.getPicture());
+        kafkaTemplate.send("events", new EventKafka(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture(), false));
         eventService.updateEvent(id, event);
     }
 

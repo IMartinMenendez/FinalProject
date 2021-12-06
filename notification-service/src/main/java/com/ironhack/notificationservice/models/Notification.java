@@ -25,4 +25,10 @@ public class Notification {
     @Getter
     @Setter
     private Boolean isRead;
+
+    public Notification(Long userId, String message, Boolean isRead) {
+        this.userId = userId;
+        this.message = message;
+        this.isRead = isRead;
+    }
 }

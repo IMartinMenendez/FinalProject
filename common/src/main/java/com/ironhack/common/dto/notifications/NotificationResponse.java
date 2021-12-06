@@ -11,6 +11,9 @@ public class NotificationResponse {
 
     @Getter
     @Setter
+    private Long id;
+    @Getter
+    @Setter
     private Long userId;
     @Getter
     @Setter
