@@ -11,6 +11,9 @@ public class CourseResponse {
 
     @Getter
     @Setter
+    private Long id;
+    @Getter
+    @Setter
     private Long creatorId;
     @Getter
     @Setter

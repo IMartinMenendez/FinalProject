@@ -13,7 +13,7 @@ public interface CourseClient {
     @GetMapping("/Courses")
     List<CourseResponse> getAllCourses();
 
-    @GetMapping("/Course/{id}")
+    @GetMapping("/Courses/{id}")
     CourseResponse getCourseById(@PathVariable Long id) throws Exception;
 
     @GetMapping("/Course/{userId}")

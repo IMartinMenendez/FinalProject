@@ -24,7 +24,7 @@ public class CourseController {
         List<Course> courses = courseService.getAllCourses();
         List<CourseResponse> courseResponses = new ArrayList<>();
         for (Course course : courses) {
-            courseResponses.add(new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
+            courseResponses.add(new CourseResponse(course.getId(), course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
         }
         return courseResponses;
     }
@@ -36,7 +36,7 @@ public class CourseController {
         if(maybeCourse.isEmpty()){
             throw new Exception("No Event found");
         }
-        return new CourseResponse(maybeCourse.get().getCreatorId(), maybeCourse.get().getTitle(), maybeCourse.get().getDescription(), maybeCourse.get().getLink(), maybeCourse.get().getPicture());
+        return new CourseResponse(maybeCourse.get().getId(), maybeCourse.get().getCreatorId(), maybeCourse.get().getTitle(), maybeCourse.get().getDescription(), maybeCourse.get().getLink(), maybeCourse.get().getPicture());
     }
 
     @GetMapping("/Course/{userId}")
@@ -45,7 +45,7 @@ public class CourseController {
         List<Course> courses = courseService.getCourseByUserId(userId);
         List<CourseResponse> courseResponses = new ArrayList<>();
         for (Course course : courses) {
-            courseResponses.add(new CourseResponse(course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
+            courseResponses.add(new CourseResponse(course.getId(), course.getCreatorId(), course.getTitle(), course.getDescription(), course.getLink(), course.getPicture()));
         }
         return courseResponses;
     }

@@ -6,6 +6,7 @@ import com.ironhack.edge.service.Impl.EventServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,12 @@ public class EventControllerImpl {
     @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     public List<EventResponse> getEventByAttendee(@PathVariable Long attendeeId,  @RequestHeader("X-Auth-Token") String token) throws Exception {
-        List<EventResponse> events = eventService.getEventByAttendee(attendeeId, token);
+        List<EventResponse> events;
+        try{
+            events = eventService.getEventByAttendee(attendeeId, token);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
         return events;
     }
 

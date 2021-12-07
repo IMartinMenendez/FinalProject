@@ -3,7 +3,9 @@ package com.ironhack.eventservice.services.Impl;
 import com.ironhack.eventservice.models.Event;
 import com.ironhack.eventservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -56,12 +58,12 @@ public class EventService {
     public void updateEventAttendee(Long id, Long attendeesId) throws Exception {
         Optional<Event> maybeCourse = eventRepository.findById(id);
         if(maybeCourse.isEmpty()){
-            throw new Exception("No Event found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Event found");
         }
         List<Long> eventId = maybeCourse.get().getAttendees();
         for(int i=0; i < eventId.size(); i++){
             if(eventId.get(i).equals(id)){
-                throw new Exception("You are already enrolled in this course");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You are already enrolled in this course");
             }
         }
         eventId.add(attendeesId);
