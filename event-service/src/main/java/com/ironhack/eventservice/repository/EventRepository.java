@@ -37,6 +37,12 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("select e FROM Event e WHERE e.type = :type")
     List<Event> getEventByType(@Param("type") String type);
 
+    @Query("select e FROM Event e WHERE e.date = :date and e.creator = :creator")
+    List<Event> getEventByDateByCreator(@Param("date") String date, @Param("creator") Long creator);
+
+    @Query(value="SELECT * FROM EVENT E left JOIN event_attendees D ON d.event_id = e.id where d.attendees = :attendeeId and date = :date", nativeQuery = true)
+    List<Event> getEventByDate(@Param("date") String date, @Param("attendeeId") Long attendeeId);
+
     @Query(value = "select e from Event e where e.type = :type and e.place = :place")
     List<Event> getEventByTypeAndPlace(@Param("type") String type, @Param("place") String place);
 }

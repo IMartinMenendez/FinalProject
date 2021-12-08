@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,13 @@ public class EventControllerImpl {
     @ResponseStatus(HttpStatus.OK)
     public List<EventResponse> getEventByTypeAndPlace(@RequestParam String type, @RequestParam String place){
         return eventService.getEventByTypeAndPlace(type, place);
+    }
+
+    @GetMapping("/Event/date/{date}/{creator}")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
+    public List<EventResponse> getEventByDate(@PathVariable String date, @PathVariable Long creator){
+        return eventService.getEventByDate(date, creator);
     }
 
     @GetMapping("/ComingSoon/{date}")

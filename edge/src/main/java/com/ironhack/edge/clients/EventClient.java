@@ -38,6 +38,10 @@ public interface EventClient {
     @ResponseStatus(HttpStatus.OK)
     List<EventResponse> getEventByTypeAndPlace(@RequestParam String type, @RequestParam String place);
 
+    @GetMapping("/Event/date/{date}/{creator}")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventByDate(@PathVariable String date, @PathVariable Long creator);
+
     @DeleteMapping("/Event/{id}")
     void deleteEventId(@PathVariable Long id) throws Exception;
 

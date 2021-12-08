@@ -41,6 +41,10 @@ public class EventService {
         eventRepository.delete(maybeEvent.get());
     }
 
+    public List<Event> getEventByDate(String date, Long creator){
+        return eventRepository.getEventByDate(date, creator);
+    }
+
     public void updateEvent(Long id, Event eventRequest) throws Exception {
         Optional<Event> maybeCourse = eventRepository.findById(id);
         if(maybeCourse.isEmpty()){
