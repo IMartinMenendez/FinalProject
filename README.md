@@ -120,6 +120,9 @@ We want to make sure you don't miss anything.
 
 It will call all other events and will be the only contact from the front end.
 
+![Dibujo sin título (1)](https://user-images.githubusercontent.com/79365505/145862868-b12fd9e1-e9b2-474c-99cf-32dce93a1cf4.png)
+
+
 <br>
 
 ## 💻&nbsp; Technology used
