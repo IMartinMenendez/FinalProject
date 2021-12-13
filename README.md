@@ -135,22 +135,15 @@ It will call all other events and will be the only contact from the front end.
 ![MySQL](	https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)
 
 
-
-
 ---
 
 ## ⚙️ Extras
 
-- Spring Security:
-    - [x] To avoid display
-    - [x] Have a default interest rate of 0.0025.
-    - [x] Have a minimum balance of less than 1000 but no lower than 100.
+- Spring Security.
+- Sign In - Sign Up features.
   
 - Apache Kafka:
   - [x] To deal with notifications for the events.
-
-- Checking Accounts:
-    - [x] Minimum Balance of 250 and a monthlyMaintenanceFee of 12.
 
 ---
 
