@@ -101,7 +101,7 @@ spring.jackson.serialization.write-dates-as-timestamps=false
 ### Events
 
 All related with Events, where they are saved and displayed. Different queries will display the Events by date, by place, by type, by user and much more!
-You can create events, delete them, join or unattend, and much more!
+You can create events, delete them, join or unattend...
 
 ### Course
 
