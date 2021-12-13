@@ -1,4 +1,4 @@
-package com.ironhack.courseservice.controller;
+package com.ironhack.courseservice.controller.Impl;
 
 import com.ironhack.common.dto.course.CourseRequest;
 import com.ironhack.common.dto.course.CourseResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class CourseController {
+public class CourseControllerImpl {
 
     @Autowired
     CourseServiceImpl courseService;

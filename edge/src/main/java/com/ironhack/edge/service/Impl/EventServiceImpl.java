@@ -60,6 +60,10 @@ public class EventServiceImpl {
         return eventClient.getEventByDate(date, creator);
     }
 
+    public List<EventResponse> getEventByDateAndUser(String date, Long creator){
+        return eventClient.getEventByDate(date, creator);
+    }
+
     public List<EventResponse> getEventsComingSoon(String date){
         return eventClient.getEventsComingSoon(date);
     }

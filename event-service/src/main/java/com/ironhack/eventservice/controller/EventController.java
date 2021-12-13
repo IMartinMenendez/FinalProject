@@ -58,6 +58,17 @@ public class EventController {
         return eventResponses;
     }
 
+    @GetMapping("/Event/dateByUser/{date}/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventResponse> getEventByDateAndUser(@PathVariable String date, @PathVariable Long id){
+        List<Event> events = eventService.getEventByDateAndUser(date, id);
+        List<EventResponse> eventResponses = new ArrayList<>();
+        for (Event event : events) {
+            eventResponses.add(new EventResponse(event.getId(), event.getType(), event.getDate(), event.getPlace(), event.getTitle(), event.getDescription(), event.getCreator(), event.getAttendees(),  event.getPicture()));
+        }
+        return eventResponses;
+    }
+
     @GetMapping("/Event/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<EventResponse> getEventByUserId(@PathVariable Long userId, @RequestHeader("X-Auth-Token") String token) throws Exception {

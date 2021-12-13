@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,16 +44,22 @@ public class EventService {
         return eventRepository.getEventByDate(date, creator);
     }
 
+    public List<Event> getEventByDateAndUser(String date, Long id){
+        return eventRepository.getEventByDateAndUserId(date, id);
+    }
+
+
+
     public void updateEvent(Long id, Event eventRequest) throws Exception {
         Optional<Event> maybeCourse = eventRepository.findById(id);
         if(maybeCourse.isEmpty()){
             throw new Exception("No Event found");
         }
         maybeCourse.get().setTitle(eventRequest.getTitle());
+        maybeCourse.get().setDate(eventRequest.getDate());
         maybeCourse.get().setDescription(eventRequest.getDescription());
         maybeCourse.get().setPicture(eventRequest.getPicture());
         maybeCourse.get().setType(eventRequest.getType());
-        maybeCourse.get().setAttendees(eventRequest.getAttendees());
         maybeCourse.get().setPlace(eventRequest.getPlace());
         eventRepository.save(maybeCourse.get());
     }

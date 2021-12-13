@@ -3,13 +3,14 @@ package com.ironhack.courseservice.services.Impl;
 
 import com.ironhack.courseservice.model.Course;
 import com.ironhack.courseservice.repository.CourseRepository;
+import com.ironhack.courseservice.services.Interfaces.CourseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CourseServiceImpl {
+public class CourseServiceImpl implements CourseServiceInterface {
 
     @Autowired
     CourseRepository courseRepository;

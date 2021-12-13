@@ -74,6 +74,13 @@ public class EventControllerImpl {
         return eventService.getEventByDate(date, creator);
     }
 
+    @GetMapping("/Event/dateByUser/{date}/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(value = "http://localhost:4200")
+    public List<EventResponse> getEventByDateAndUser(@PathVariable String date, @PathVariable Long id){
+        return eventService.getEventByDateAndUser(date, id);
+    }
+
     @GetMapping("/ComingSoon/{date}")
     @CrossOrigin(value = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)

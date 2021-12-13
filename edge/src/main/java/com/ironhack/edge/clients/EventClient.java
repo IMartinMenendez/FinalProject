@@ -42,6 +42,10 @@ public interface EventClient {
     @ResponseStatus(HttpStatus.OK)
     List<EventResponse> getEventByDate(@PathVariable String date, @PathVariable Long creator);
 
+    @GetMapping("/Event/dateByUser/{date}/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    List<EventResponse> getEventByDateAndUser(@PathVariable String date, @PathVariable Long id);
+
     @DeleteMapping("/Event/{id}")
     void deleteEventId(@PathVariable Long id) throws Exception;
 
