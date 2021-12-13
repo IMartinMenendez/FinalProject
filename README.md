@@ -53,7 +53,7 @@
   </ol>
 </details>
 
-We want to live in a better place. We want to help others. That is why ecommit born. Because We truly believe we are in this world to help us each others.
+We want to live in a better place. We want to help others. That is why Ecommit was born. Because We truly believe We are in this world to help us each others.
 
 <div align="center">
     <img width="400" alt="Asset 7@2x" src="https://user-images.githubusercontent.com/79365505/145860372-657df332-8a68-416e-8ce3-547d40d9e639.jpeg">
@@ -69,10 +69,10 @@ We want to live in a better place. We want to help others. That is why ecommit b
 
 ##  🚀&nbsp; Installation and Documentation 
 
-Please note, this project has 4 Microservices and an Edge connecting all of them. You will need tot have all up and running with Eureka to make this project work.
+Please note, this project has 4 Microservices and an Edge connecting all of them. You will need to have all up and running with Eureka to make this project work.
 You will need to clone the project or download it as a zip from the [Final Project Repository](https://github.com/IMartinMenendez/FinalProject.git). Also, you will need to clone the front end repository to visualize the web. Do it on [Final Project Front End Repository](https://github.com/IMartinMenendez/FinalProjectFront.git) 
 After that, you will need to replicate the database.
-You can find the database structure Table.SQL file named [SQL Structure](https://github.com/IMartinMenendez/FinalProject/blob/master/sql.sql). Just copy and create them.
+You can find the database structure Table.SQL file named [SQL Structure](https://github.com/IMartinMenendez/FinalProject/blob/master/sql.sql). Just copy and create them and insert the data is also included in the same file.
 Also, you will need to set up the project and link it with the database. Please add the details on application.properties under the folder resources.
 This set up will be very similar to this:
 
@@ -94,22 +94,23 @@ server.error.include-binding-errors=always
 spring.jackson.serialization.write-dates-as-timestamps=false
 ```
 
-You will need to do it also to test the application.
-
 ---
 
 ## ✏️&nbsp; Microservices
 
 ### Events
 
-All related with Events, where they are saved and displayed
+All related with Events, where they are saved and displayed. Different queries will display the Events by date, by place, by type, by user and much more!
+You can create events, delete them, join or unattend, and much more!
+
 ### Course
 
 Similar Microservice to the Events. We will keep and display all courses with this Microservice.
 
 ### Users
 
-Taking care of all security, login and logout methods and checking token to make sure the user is right to change, delete or create an event.
+Taking care of all security, login and logout methods and checking token to make sure the user is right to change, delete or create an event. To do this, a token would be saved to the database, and the front will send with the request for the user, and the user service would check if this token is in fact for the user that requested it.
+On the logout, the token would be removed from the database.
 
 ### Notifications
 
@@ -118,7 +119,9 @@ We want to make sure you don't miss anything.
 
 ### Edge
 
-It will call all other events and will be the only contact from the front end.
+It will call all other events and will be the only contact from the front end, and responsible to call the right service to get the information.
+
+### Architecture
 
 ![Dibujo sin título (1)](https://user-images.githubusercontent.com/79365505/145862868-b12fd9e1-e9b2-474c-99cf-32dce93a1cf4.png)
 
