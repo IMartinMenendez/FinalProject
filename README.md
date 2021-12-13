@@ -2,12 +2,14 @@
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
 
-</a>![](resources/Asset 7@2x.png)
+</a>
+    <img width="1445" alt="Asset 7@2x" src="https://user-images.githubusercontent.com/79365505/145860319-d70204a9-1c44-43d5-b1a5-6339bb40909c.png">
+
 </p>
 
 <br/>
 
-<h2 align="center">Welcome were change starts.</h2>
+<h2 align="center">Welcome where the change begings.</h2>
 
 
 <div align="center">
@@ -35,27 +37,27 @@
 <details open="open">
   <summary><h2 style="display: inline-block"> 📋 Table of Contents</h2></summary>
   <ol>
-    <li><a href="#installationanddocumentation">Installation and Documentation</a>
+    <li>Installation and Documentation
     </li>
-    <li><a href="-commands-to-use">Microservices</a>
+    <li>Microservices
     </li>
-    <li><a href="-commands-to-use">Extras</a>
+    <li>Extras
     </li>
-    <li><a href="-commands-to-use">Technology used</a></li>
-    <li><a href="#contact">Functionalities</a></li>
-    <li><a href="#contact">Author</a></li>
-    <li><a href="#contact"> Have a question?</a></li>
-    <li><a href="#contact"> Found a bug?</a></li>
-    <li><a href="#contact"> Requirements</a></li>
-    <li><a href="#contact"> License</a></li>
+    <li>Technology used</li>
+    <li>Functionalities</li>
+    <li>Author</li>
+    <li> Have a question?</li>
+    <li> Found a bug?</li>
+    <li> Requirements</li>
+    <li> License/li>
   </ol>
 </details>
 
 We want to live in a better place. We want to help others. That is why ecommit born. Because We truly believe we are in this world to help us each others.
 
-![](resources/WhatsApp Image 2021-11-22 at 21.28.40.jpeg)
-
-<img src="resources/WhatsApp%20Image%202021-11-22%20at%2021.28.40.jpeg" alt="image" width="200"/>
+<div align="center">
+    <img width="400" alt="Asset 7@2x" src="https://user-images.githubusercontent.com/79365505/145860372-657df332-8a68-416e-8ce3-547d40d9e639.jpeg">
+</div>
 
 - How it works:
   - [x] Create an Account.
@@ -118,6 +120,9 @@ We want to make sure you don't miss anything.
 
 It will call all other events and will be the only contact from the front end.
 
+![Dibujo sin título (1)](https://user-images.githubusercontent.com/79365505/145862868-b12fd9e1-e9b2-474c-99cf-32dce93a1cf4.png)
+
+
 <br>
 
 ## 💻&nbsp; Technology used
@@ -130,22 +135,15 @@ It will call all other events and will be the only contact from the front end.
 ![MySQL](	https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)
 
 
-
-
 ---
 
 ## ⚙️ Extras
 
-- Spring Security:
-    - [x] To avoid display
-    - [x] Have a default interest rate of 0.0025.
-    - [x] Have a minimum balance of less than 1000 but no lower than 100.
+- Spring Security.
+- Sign In - Sign Up features.
   
 - Apache Kafka:
   - [x] To deal with notifications for the events.
-
-- Checking Accounts:
-    - [x] Minimum Balance of 250 and a monthlyMaintenanceFee of 12.
 
 ---
 
