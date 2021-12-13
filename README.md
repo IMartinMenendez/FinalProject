@@ -1,13 +1,13 @@
 <br/>
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
-        <img width="50%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Banco_Santander_Logotipo.svg/2560px-Banco_Santander_Logotipo.svg.png" alt="Sulu logo">
-    </a>
+
+</a>![](resources/Asset 7@2x.png)
 </p>
 
 <br/>
 
-<h2 align="center">Your money secure with the best bank online in the market</h2>
+<h2 align="center">Welcome were change starts.</h2>
 
 
 <div align="center">
@@ -37,10 +37,12 @@
   <ol>
     <li><a href="#installationanddocumentation">Installation and Documentation</a>
     </li>
-    <li><a href="-commands-to-use">Commands to use</a>
+    <li><a href="-commands-to-use">Microservices</a>
+    </li>
+    <li><a href="-commands-to-use">Extras</a>
     </li>
     <li><a href="-commands-to-use">Technology used</a></li>
-    <li><a href="#contact">Funcionallities</a></li>
+    <li><a href="#contact">Functionalities</a></li>
     <li><a href="#contact">Author</a></li>
     <li><a href="#contact"> Have a question?</a></li>
     <li><a href="#contact"> Found a bug?</a></li>
@@ -49,23 +51,26 @@
   </ol>
 </details>
 
-Welcome to the new generation bank online. You can easily create a different bank accounts where you can keep your money safe and make transfers.
+We want to live in a better place. We want to help others. That is why ecommit born. Because We truly believe we are in this world to help us each others.
 
-- Types of Accounts:
-  - [x] Checking Accounts.
-  - [x] Saving Accounts.
-  - [x] Credit Card Accounts.
-  - [x] Student Checking accounts.
+![](resources/WhatsApp Image 2021-11-22 at 21.28.40.jpeg)
+
+<img src="resources/WhatsApp%20Image%202021-11-22%20at%2021.28.40.jpeg" alt="image" width="200"/>
+
+- How it works:
+  - [x] Create an Account.
+  - [x] Looking for events you wanted to attend.
+  - [x] Don't find what are your looking for? Create your own and give the chance to other users to attend to it.
+  - [x] Change the world.
   
-Please go to <a href="#functionalities">funcionalities</a> to know more about them.
-
 ---
 
 ##  🚀&nbsp; Installation and Documentation 
 
-You will need to clone the project or download it as a zip from the [Banking System Repository](https://github.com/IMartinMenendez/bankingSystem.git). After that, you will need to replicate the database.
-You can find the database structure Table.SQL file named [SQL Structure](https://github.com/IMartinMenendez/bankingSystem/blob/master/Table.sql). Just copy and create them.
-
+Please note, this project has 4 Microservices and an Edge connecting all of them. You will need tot have all up and running with Eureka to make this project work.
+You will need to clone the project or download it as a zip from the [Final Project Repository](https://github.com/IMartinMenendez/FinalProject.git). Also, you will need to clone the front end repository to visualize the web. Do it on [Final Project Front End Repository](https://github.com/IMartinMenendez/FinalProjectFront.git) 
+After that, you will need to replicate the database.
+You can find the database structure Table.SQL file named [SQL Structure](https://github.com/IMartinMenendez/FinalProject/blob/master/sql.sql). Just copy and create them.
 Also, you will need to set up the project and link it with the database. Please add the details on application.properties under the folder resources.
 This set up will be very similar to this:
 
@@ -91,127 +96,56 @@ You will need to do it also to test the application.
 
 ---
 
-## ✏️&nbsp; Commands to use
+## ✏️&nbsp; Microservices
 
-### Admins
+### Events
 
-Admins should be able to access the balance for any account and to modify it.
-### AccountHolders
+All related with Events, where they are saved and displayed
+### Course
 
-AccountHolders should be able to access their own account balance
-Account holders should be able to transfer money from any of their accounts to any other account (regardless of owner). The transfer should only be processed if the account has sufficient funds. The user must provide the Primary or Secondary owner name and the id of the account that should receive the transfer.
-### Third-Party Users
+Similar Microservice to the Events. We will keep and display all courses with this Microservice.
 
-There must be a way for third-party users to receive and send money to other accounts.
-Third-party users must be added to the database by an admin.
-In order to receive and send money, Third-Party Users must provide their hashed key in the header of the HTTP request. They also must provide the amount, the Account id and the account secret key.
+### Users
 
-### **Method available:**
+Taking care of all security, login and logout methods and checking token to make sure the user is right to change, delete or create an event.
 
-  `GET` | `POST` 
+### Notifications
 
+This Microservice use Kafka to display notifications to all users attending to an event, if this event is modified or deleted.
+We want to make sure you don't miss anything.
 
-<br>
+### Edge
 
-| Method   | Endpoint                                 | Description                              | User                              |
-| -------- | ---------------------------------------- | ---------------------------------------- |-----------------------------------
-| `GET`    | `/accounts`         | Retrieve all accounts.                    | Admin                             |
-| `POST`   | `/accounts`         | Create a new post.                       | AccountHolders                    |
-| `GET`    | `/accounts/{id}`      | The user can see their own account       | AccountHolders                    |
-| `GET`    | `/users/{id}`         | See an User with id                      | Admin, AccountHolders             |
-| `POST`   | `/users`            | Create a new user                        | Admin                             |
-| `POST`   | `/transfer`         | Make a transfer between accounts         | Admin, AccountHolders, Third-Party|
-
-### **Available Roles:**
-
-`ADMIN`  | `ACCOUNT HOLDER`| `THIRD-PARTY`
+It will call all other events and will be the only contact from the front end.
 
 <br>
-
-### **Json to get/post information:**
-
-<br>
-
-#### To create new user:
-
-```
-{
-"type": "account_holder",
-"name": "user2",
-"password": "123456",
-"dateOfBirth": "1888-01-15",
-"address": {
-"street": "calle falsa 123",
-"city": "London",
-"country": "UK",
-"postalCode": "123456"
-},
-"roles": [
-"ADMIN"
-]
-}
-```
-
-####To create an account:
-
-```
-{
-    "type": "checking",
-    "balance": {
-        "amount": 300,
-        "currency": "EUR"
-    },
-    "primaryOwnerId":  1,
-    "secondaryOwnerId": null,
-    "status":"ACTIVE",
-    "secretKey": "secret-key-123"
-}
-```
-
-####To create a transaction:
-
-```
-{
-    "type": "account_holder",
-    "amount": {
-        "amount": 200,
-        "currency": "EUR"
-    },
-    "fromAccountId": 3,
-    "toAccountId": 4
-}
-```
-
-
 
 ## 💻&nbsp; Technology used
 
-![Java Badge](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white) 
+
+![Java Badge](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![MySQL](	https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)
+
+
 
 
 ---
 
-## ⚙️ Funcionalities
+## ⚙️ Extras
 
-- Savings accounts:
-    - [x] Savings accounts should have a default minimumBalance of 1000
+- Spring Security:
+    - [x] To avoid display
     - [x] Have a default interest rate of 0.0025.
     - [x] Have a minimum balance of less than 1000 but no lower than 100.
   
-- Credit Cards:
-  - [x] Have a default creditLimit of 100.
-  - [x] Credit Limit higher than 100 but not higher than 100000.
-  - [x] Default interestRate of 0.2 not lower than 0.1.
+- Apache Kafka:
+  - [x] To deal with notifications for the events.
 
 - Checking Accounts:
     - [x] Minimum Balance of 250 and a monthlyMaintenanceFee of 12.
-
-- Penalty Fee:
-    - [x] The penaltyFee for all accounts should be 40.
-    - [x] If any account drops below the minimumBalance, the penaltyFee should be deducted from the balance automatically
-- Interest Rate:
-    - [x] Interest on savings accounts is added to the account annually at the rate of specified interestRate per year.
-    - [x] Interest on credit cards is added to the balance monthly.
 
 ---
 
@@ -240,13 +174,13 @@ We are happy to hearing about your questions and concerns. Please don't hesitate
 
 ## 🤝&nbsp; Found a bug? Missing a specific feature?
 
-Feel free to **file a new issue** with a respective title and description on the [Banking System Repository](https://github.com/IMartinMenendez/bankingSystem/issues). I really will appreciate your feedback to improve the system.
+Feel free to **file a new issue** with a respective title and description on the [Final Project Issues](https://github.com/IMartinMenendez/FinalProject/issues). I really will appreciate your feedback to improve the system.
 
 ---
 
 ## ✅&nbsp; Requirements
 
-You should have Postman and IDE. Just clone the repository from [Banking System Repository](https://github.com/IMartinMenendez/bankingSystem.git) and try it!
+You should have Postman and IDE. Just clone the repository from [Final Project Issues](https://github.com/IMartinMenendez/FinalProject) and try it!
 
 ---
 
