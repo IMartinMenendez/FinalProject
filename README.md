@@ -2,7 +2,9 @@
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
 
-</a>![](resources/Asset 7@2x.png)
+</a>
+    <img width="1445" alt="Asset 7@2x" src="https://user-images.githubusercontent.com/79365505/145860319-d70204a9-1c44-43d5-b1a5-6339bb40909c.png">
+
 </p>
 
 <br/>
@@ -35,27 +37,27 @@
 <details open="open">
   <summary><h2 style="display: inline-block"> 📋 Table of Contents</h2></summary>
   <ol>
-    <li><a href="#installationanddocumentation">Installation and Documentation</a>
+    <li>Installation and Documentation
     </li>
-    <li><a href="-commands-to-use">Microservices</a>
+    <li>Microservices
     </li>
-    <li><a href="-commands-to-use">Extras</a>
+    <li>Extras
     </li>
-    <li><a href="-commands-to-use">Technology used</a></li>
-    <li><a href="#contact">Functionalities</a></li>
-    <li><a href="#contact">Author</a></li>
-    <li><a href="#contact"> Have a question?</a></li>
-    <li><a href="#contact"> Found a bug?</a></li>
-    <li><a href="#contact"> Requirements</a></li>
-    <li><a href="#contact"> License</a></li>
+    <li>Technology used</li>
+    <li>Functionalities</li>
+    <li>Author</li>
+    <li> Have a question?</li>
+    <li> Found a bug?</li>
+    <li> Requirements</li>
+    <li> License/li>
   </ol>
 </details>
 
 We want to live in a better place. We want to help others. That is why ecommit born. Because We truly believe we are in this world to help us each others.
 
-![](resources/WhatsApp Image 2021-11-22 at 21.28.40.jpeg)
-
-<img src="resources/WhatsApp%20Image%202021-11-22%20at%2021.28.40.jpeg" alt="image" width="200"/>
+<div align="center">
+    <img width="400" alt="Asset 7@2x" src="https://user-images.githubusercontent.com/79365505/145860372-657df332-8a68-416e-8ce3-547d40d9e639.jpeg">
+</div>
 
 - How it works:
   - [x] Create an Account.
